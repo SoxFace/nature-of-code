@@ -23,8 +23,11 @@ export default function Home() {
         <section>
           <h2 className="text-2xl font-semibold mb-3">Exercises</h2>
           <ul className="list-disc pl-5 space-y-1">
-            {/* Add vector sketches here when you create them */}
-            <li className="text-gray-400">Coming soon...</li>
+          <li>
+              <Link href="/exercises/01-down-right-walk" className="text-blue-500 hover:underline">
+                0.1: Down to the Right Walker
+              </Link>
+            </li>
           </ul>
         </section>
       </div>
