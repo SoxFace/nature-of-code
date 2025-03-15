@@ -10,6 +10,11 @@ export default function Home() {
         <section>
           <h2 className="text-2xl font-semibold mb-3">Examples</h2>
           <ul className="list-disc pl-5 space-y-1">
+          <li>
+              <Link href="/examples/02-random-number-distribution" className="text-blue-500 hover:underline">
+                0.2: Random Number Distribution
+              </Link>
+            </li>
             <li>
               <Link href="/examples/01-random-walk" className="text-blue-500 hover:underline">
                 0.1: Traditional Random Walk
