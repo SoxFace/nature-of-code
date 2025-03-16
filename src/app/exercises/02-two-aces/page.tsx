@@ -8,7 +8,7 @@ export default function TwoAces() {
     // Define the sketch function
     const sketch = (p: p5) => {
         // Constants
-        const SIMULATIONS = 1000;
+        const SIMULATIONS = 100000;
         const CARD_VALUES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
         const CARD_SUITS = ['♥', '♦', '♣', '♠'];
         
@@ -31,6 +31,7 @@ export default function TwoAces() {
         }
         
         // Shuffle a deck using Fisher-Yates algorithm
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         function shuffleDeck(deck: any[]) {
             const newDeck = [...deck];
             for (let i = newDeck.length - 1; i > 0; i--) {
@@ -41,7 +42,7 @@ export default function TwoAces() {
         }
         
         // Draw a card from the deck
-        function drawCard(deck: any[], removeCard = true) {
+        function drawCard(deck: unknown[], removeCard = true) {
             const index = Math.floor(p.random(deck.length));
             const card = deck[index];
             
@@ -53,6 +54,7 @@ export default function TwoAces() {
         }
         
         // Check if card is an ace
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         function isAce(card: any) {
             return card.value === 'A';
         }
@@ -174,20 +176,18 @@ export default function TwoAces() {
             }
             
             // Button
-            const buttonX = p.width - 110; // 10 pixels from the right edge
-            const buttonY = p.height - 50; // 10 pixels from the bottom edge
             p.fill(isRunning ? 150 : 100, 100, isRunning ? 100 : 150);
-            p.rect(buttonX, buttonY, 100, 40);
+            p.rect(250, 340, 100, 40);
             p.fill(255);
             p.textAlign(p.CENTER, p.CENTER);
-            p.text(isRunning ? "Running..." : "Start", buttonX + 50, buttonY + 20);
+            p.text(isRunning ? "Running..." : "Start", 300, 360);
             p.textAlign(p.LEFT, p.CENTER);
         };
         
         // Handle mouse clicks
         p.mousePressed = () => {
             // Check if button was clicked
-            if (p.mouseX > buttonX && p.mouseX < buttonY && p.mouseY > buttonY && p.mouseY < buttonY && !isRunning) {
+            if (p.mouseX > 250 && p.mouseX < 350 && p.mouseY > 340 && p.mouseY < 380 && !isRunning) {
                 runSimulations();
             }
         };
