@@ -7,6 +7,7 @@ export default function Home() {
       <p className="mb-8">Exploring the concepts The Nature of Code (2024 edition).</p>
       
       <div className="space-y-6">
+        {/* EXAMPLES */}
         <section>
           <h2 className="text-2xl font-semibold mb-3">Examples</h2>
           <ul className="list-disc pl-5 space-y-1">
@@ -20,15 +21,19 @@ export default function Home() {
                 0.1: Traditional Random Walk
               </Link>
             </li>
-            {/* Add more sketches here as you create them */}
           </ul>
         </section>
         
-        {/* Add more chapters here */}
+        {/* EXERCISES */}
         <section>
           <h2 className="text-2xl font-semibold mb-3">Exercises</h2>
           <ul className="list-disc pl-5 space-y-1">
           <li>
+              <Link href="/exercises/02-two-aces" className="text-blue-500 hover:underline">
+                0.2: Two aces
+              </Link>
+            </li>
+            <li>
               <Link href="/exercises/01-down-right-walk" className="text-blue-500 hover:underline">
                 0.1: Down to the Right Walker
               </Link>
