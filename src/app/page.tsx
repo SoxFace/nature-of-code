@@ -12,6 +12,11 @@ export default function Home() {
           <h2 className="text-2xl font-semibold mb-3">Examples</h2>
           <ul className="list-disc pl-5 space-y-1">
           <li>
+              <Link href="/examples/03-walker-right" className="text-blue-500 hover:underline">
+                0.3: Right walker
+              </Link>
+            </li>
+            <li>
               <Link href="/examples/02-random-number-distribution" className="text-blue-500 hover:underline">
                 0.2: Random Number Distribution
               </Link>
