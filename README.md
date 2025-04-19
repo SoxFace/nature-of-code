@@ -1,38 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nature of Code
+A Next.js application exploring concepts from Daniel Shiffman's ["The Nature of Code 2024 Ed."](https://natureofcode.com/) using p5.js
 
 ## Getting Started
 
-First, run the development server:
+- `npm install`
+- `npm run dev` # localhost:3000
+- `vercel`      # deploy
 
-```bash
-npm run dev
+## 🚀 Deployed using Vercel
+[Live Site](https://nature-of-code-jgcek5us5-sxofaces-projects.vercel.app/)
+
+## Dependencies
+
+- Next.js 15.3 - React framework with App Router
+- p5.js - Creative coding library
+- TypeScript - Type-safe JavaScript
+- Tailwind CSS - Utility-first CSS framework
+- Vercel - Deployment platform
+
+## Structure
+
+```
+nature-of-code/
+├── public/           
+├── src/
+│   ├── app/           # Next.js App Router
+│   │   ├── examples/  # Examples
+│   │   ├── exercises/ # Practice exercises
+│   │   └── page.tsx   # Home page
+│   └── components/    
+│       ├── P5Wrapper.tsx    # p5.js integration
+│       └── SketchLayout.tsx # Layout for sketches
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Implementation Notes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+All p5.js components use the 'use client' directive to ensure they only run in the browser. Dynamic imports are used to prevent server-side rendering (SSR) issues:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+'use client';
 
-## Learn More
+import dynamic from 'next/dynamic';
+const P5Wrapper = dynamic(() => import('@/components/P5Wrapper'), { ssr: false });
+import SketchLayout from '@/components/SketchLayout';
+```
 
-To learn more about Next.js, take a look at the following resources:
+🙏 Acknowledgements
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Daniel Shiffman for "The Nature of Code" book and concepts
+- p5.js for the creative coding library
+- Next.js for the React framework
+- Vercel for deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Tips for Growing Your Project
+## What I want to learn to do:
 
 1. Create utility classes for common concepts like vectors, forces, etc.
-2. Consider creating shared sketch components like particles, springs, etc.
-3. Add your own notes and explanations alongside the sketches
+2. Create shared sketch components like particles, springs, etc.
 4. Use TypeScript interfaces for better code organization
-5. Add controls to your sketches using basic HTML inputs or a library like react-dat-gui
+5. Add controls to sketches or implement a suitable library
