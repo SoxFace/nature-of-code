@@ -39,10 +39,15 @@ export default function Home() {
           <h2 className="text-2xl font-semibold mb-3">Exercises</h2>
           <ul className="list-disc pl-5 space-y-1">
           <li>
+              <Link href="/exercises/05-gaussian-walker" className="text-blue-500 hover:underline">
+                0.5: Gaussian walker
+              </Link>
+          </li>
+          <li>
               <Link href="/exercises/04-paint-splatter" className="text-blue-500 hover:underline">
                 0.4: Paint Splatter
               </Link>
-            </li>
+          </li>
           <li>
               <Link href="/exercises/03-walk-random-mouse" className="text-blue-500 hover:underline">
                 0.3: Random dynamic walker
