@@ -56,7 +56,7 @@ export default function RightWalker() {
 
     return (
         <SketchLayout
-            title="Exercise 0.3: Right Walker"
+            title="Example 0.3: Right Walker"
             description="A random walker moves to the right"
         >
             <P5Wrapper sketch={sketch} />

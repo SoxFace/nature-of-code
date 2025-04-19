@@ -72,7 +72,7 @@ export default function TraditionalRandomWalker() {
 
     return (
         <SketchLayout
-    title="Traditional Random Walk"
+    title="Example 0.1: Traditional Random Walk"
     description="A simple random walk simulation where each step moves in one of four directions with equal probability. It has a toggle to switch between discrete (grid-like) and continuous random values and automatically stops at 1000 data points."
 >
     <div className="space-y-4">
