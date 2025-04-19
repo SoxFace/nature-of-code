@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   
   // Configure webpack to handle browser-specific libraries like p5.js
   webpack: (config) => {

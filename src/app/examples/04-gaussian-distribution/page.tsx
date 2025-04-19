@@ -1,6 +1,8 @@
-"use client";
+'use client';
 
-import P5Wrapper from '@/components/P5Wrapper';
+import dynamic from 'next/dynamic';
+// Dynamically import P5Wrapper to disable SSR
+const P5Wrapper = dynamic(() => import('@/components/P5Wrapper'), { ssr: false });
 import SketchLayout from '@/components/SketchLayout';
 import p5 from 'p5';
 
