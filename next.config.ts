@@ -4,11 +4,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   
-  // Explicitly declare that we're using the App Router
-  experimental: {
-    appDir: true,
-  },
-  
   // Configure webpack to handle browser-specific libraries like p5.js
   webpack: (config) => {
     // This ensures p5.js and other browser-only libraries 
