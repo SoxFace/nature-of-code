@@ -12,6 +12,11 @@ export default function Home() {
           <h2 className="text-2xl font-semibold mb-3">Examples</h2>
           <ul className="list-disc pl-5 space-y-1">
           <li>
+              <Link href="/examples/05-accept-reject-dist" className="text-blue-500 hover:underline">
+                0.5: Accept Reject Distribution
+              </Link>
+            </li>
+          <li>
               <Link href="/examples/04-gaussian-distribution" className="text-blue-500 hover:underline">
                 0.4: Gaussian Distribution
               </Link>
