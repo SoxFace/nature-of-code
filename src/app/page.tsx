@@ -44,6 +44,11 @@ export default function Home() {
           <h2 className="text-2xl font-semibold mb-3">Exercises</h2>
           <ul className="list-disc pl-5 space-y-1">
           <li>
+              <Link href="/exercises/06-accept-reject-walker" className="text-blue-500 hover:underline">
+                0.6: Accept-Reject walker
+              </Link>
+          </li>
+          <li>
               <Link href="/exercises/05-gaussian-walker" className="text-blue-500 hover:underline">
                 0.5: Gaussian walker
               </Link>
