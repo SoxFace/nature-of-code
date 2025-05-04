@@ -31,6 +31,7 @@ export default function Home() {
   ];
 
   const exercises = [
+    { href: '/exercises/09-noise-detail-animated', label: '0.9: Visual Effects using noiseDetail animated' },
     { href: '/exercises/08-noise-detail', label: '0.8: Visual Effects using noiseDetail' },
     { href: '/exercises/07-perlin-noise-random-walker', label: '0.7: Perlin Noise Random walker' },
     { href: '/exercises/06-accept-reject-walker', label: '0.6: Accept-Reject walker' },
