@@ -22,6 +22,7 @@ const Section = ({ title, items }: SectionProps) => (
 
 export default function Home() {
   const examples = [
+    { href: '/examples/07-fractal-tree', label: '0.7: Fractal Tree' },
     { href: '/examples/06-perlin-noise-walker', label: '0.6: Perlin Noise Walker' },
     { href: '/examples/05-accept-reject-dist', label: '0.5: Accept Reject Distribution' },
     { href: '/examples/04-gaussian-distribution', label: '0.4: Gaussian Distribution' },
