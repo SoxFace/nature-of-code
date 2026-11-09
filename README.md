@@ -1,60 +1,97 @@
 # Nature of Code
-A Next.js application exploring concepts from Daniel Shiffman's ["The Nature of Code 2024 Ed."](https://natureofcode.com/) using p5.js
+
+A Next.js application exploring concepts from Daniel Shiffman's ["The Nature of Code 2024 Ed."](https://natureofcode.com/) using p5.js and TypeScript.
 
 ## Getting Started
 
-- `npm install`
-- `npm run dev` # localhost:3000
-- `vercel`      # deploy
+```bash
+npm install
+npm run dev   # localhost:3000
+```
 
-## 🚀 Deployed using Vercel
+## Deployed
+
 [Live Site](https://nature-of-code-jgcek5us5-sxofaces-projects.vercel.app/)
 
-## Dependencies
+## Tech Stack
 
-- Next.js 15.3 - React framework with App Router
-- p5.js - Creative coding library
-- TypeScript - Type-safe JavaScript
-- Tailwind CSS - Utility-first CSS framework
-- Vercel - Deployment platform
+- **Next.js 16** - React framework with App Router and Turbopack
+- **React 19** - UI library
+- **p5.js** - Creative coding library
+- **TypeScript** - Type-safe JavaScript
+- **Tweakpane** - Interactive parameter controls
+- **Tailwind CSS** - Utility-first CSS framework
 
-## Structure
+## Project Structure
 
 ```
 nature-of-code/
-├── public/           
 ├── src/
-│   ├── app/           # Next.js App Router
-│   │   ├── examples/  # Examples
-│   │   ├── exercises/ # Practice exercises
-│   │   └── page.tsx   # Home page
-│   └── components/    
-│       ├── P5Wrapper.tsx    # p5.js integration
-│       └── SketchLayout.tsx # Layout for sketches
+│   ├── app/
+│   │   └── page.tsx          # SPA home with sidebar + sketch viewer
+│   ├── components/
+│   │   ├── P5Wrapper.tsx     # p5.js React integration
+│   │   ├── Sidebar.tsx       # Collapsible chapter navigation
+│   │   └── SketchViewer.tsx  # Dynamic sketch loader
+│   ├── lib/
+│   │   ├── Vector.ts         # 2D vector math
+│   │   ├── Walker.ts         # Walker class variants
+│   │   ├── useTweakpane.ts   # Tweakpane utilities
+│   │   └── types.ts          # Core interfaces
+│   └── sketches/
+│       ├── types.ts          # SketchMeta, SketchModule types
+│       ├── chapters.ts       # Chapter metadata (0-10)
+│       ├── index.ts          # Registry exports
+│       ├── 0-ex-*.tsx        # Chapter 0 examples
+│       └── 0-exercise-*.tsx  # Chapter 0 exercises
 ```
+
+## Adding New Sketches
+
+Create a new file in `src/sketches/` following the naming convention:
+
+```tsx
+// src/sketches/1-ex-01-vectors.tsx
+'use client';
+
+import type { SketchMeta } from './types';
+
+export const meta: SketchMeta = {
+  chapter: 1,
+  type: 'example',
+  number: 1,
+  title: 'Bouncing Ball',
+  description: 'Basic vector motion example.',
+};
+
+export default function BouncingBall() {
+  // Your p5.js sketch component
+}
+```
+
+Then add the import to `src/sketches/index.ts`.
+
+## Shared Library
+
+The `src/lib/` folder contains reusable utilities:
+
+- **Vector** - 2D vector math (add, sub, normalize, limit, etc.)
+- **Walker variants** - BiasedWalker, GaussianWalker, PerlinWalker, MouseSeekingWalker, AcceptRejectWalker
+- **Tweakpane helpers** - `createPane()`, `disposePane()`, common bindings
 
 ## Implementation Notes
 
-All p5.js components use the 'use client' directive to ensure they only run in the browser. Dynamic imports are used to prevent server-side rendering (SSR) issues:
+All p5.js sketches use client-side rendering:
 
-```
+```tsx
 'use client';
 
 import dynamic from 'next/dynamic';
 const P5Wrapper = dynamic(() => import('@/components/P5Wrapper'), { ssr: false });
-import SketchLayout from '@/components/SketchLayout';
 ```
 
-🙏 Acknowledgements
+## Acknowledgements
 
 - Daniel Shiffman for "The Nature of Code" book and concepts
 - p5.js for the creative coding library
-- Next.js for the React framework
-- Vercel for deployment
-
-## What I want to learn to do:
-
-1. Create utility classes for common concepts like vectors, forces, etc.
-2. Create shared sketch components like particles, springs, etc.
-4. Use TypeScript interfaces for better code organization
-5. Add controls to sketches or implement a suitable library
+- Next.js team for the React framework
