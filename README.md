@@ -5,13 +5,15 @@ A Next.js application exploring concepts from Daniel Shiffman's ["The Nature of 
 ## Getting Started
 
 ```bash
-npm install
-npm run dev   # localhost:3000
+mise install
+npx install
+npx run dev   # localhost:3000
+npx vercel --prod # deploy
 ```
 
 ## Deployed
 
-[Live Site](https://nature-of-code-jgcek5us5-sxofaces-projects.vercel.app/)
+[Live Site](https://nature-of-code-psi.vercel.app)
 
 ## Tech Stack
 
@@ -95,3 +97,12 @@ const P5Wrapper = dynamic(() => import('@/components/P5Wrapper'), { ssr: false }
 - Daniel Shiffman for "The Nature of Code" book and concepts
 - p5.js for the creative coding library
 - Next.js team for the React framework
+
+## Learning Objectives
+
+- Vector math (addition, subtraction, normalization, dot product)
+- Random distributions (uniform, Gaussian, Perlin noise, accept-reject)
+- Object-oriented design with class hierarchies (Walker variants)
+- Registry pattern for content management (like Storybook/Astro)
+- TypeScript interfaces for domain modeling
+- SPA architecture with URL-based navigation
