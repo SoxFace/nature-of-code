@@ -19,7 +19,5 @@ export {
   AcceptRejectWalker,
   type WalkerOptions,
 } from './Walker';
-export { Creature, defaultTraits, creaturePresets, type CreatureTraits } from './Creature';
-
 // Tweakpane helpers
 export { createPane, disposePane, bindings, Pane } from './useTweakpane';

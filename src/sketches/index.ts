@@ -30,7 +30,7 @@ export * as Exercise07PerlinWalker from './0-exercise-07-perlin-walker';
 export * as Exercise08NoiseDetail from './0-exercise-08-noise-detail';
 export * as Exercise09NoiseAnimated from './0-exercise-09-noise-animated';
 export * as Exercise10NoiseElevation from './0-exercise-10-noise-elevation';
-export * as Exercise11EcosystemPondSkimmer from './0-ecosystem-pond-skimmer';
+export * as Exercise11EcosystemPond from './0-ecosystem-pond';
 
 // Registry of all sketch modules
 const sketchModules: SketchModule[] = [
@@ -53,7 +53,7 @@ const sketchModules: SketchModule[] = [
   require('./0-exercise-08-noise-detail'),
   require('./0-exercise-09-noise-animated'),
   require('./0-exercise-10-noise-elevation'),
-  require('./0-ecosystem-pond-skimmer'),
+  require('./0-ecosystem-pond'),
 ];
 
 // Build lookup maps
