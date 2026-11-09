@@ -13,11 +13,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tweakpane/core": "^2.0.5",
     "@vercel/analytics": "^1.5.0",
     "next": "^16.4.5",
     "p5": "^1.11.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tweakpane": "^4.0.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

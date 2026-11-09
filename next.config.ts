@@ -2,21 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  
-  // Configure webpack to handle browser-specific libraries like p5.js
-  webpack: (config) => {
-    // This ensures p5.js and other browser-only libraries 
-    // don't run during server-side rendering
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-      net: false,
-      tls: false,
-      "fs/promises": false,
-    };
-    
-    return config;
-  },
+
+  // Next.js 16 uses Turbopack by default
+  // Empty config silences the webpack migration warning
+  // Our p5.js sketches use 'use client' so no SSR concerns
+  turbopack: {},
 };
 
 export default nextConfig;
