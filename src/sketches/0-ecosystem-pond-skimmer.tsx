@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import p5 from 'p5';
-import { Creature, createPane, disposePane, Pane } from '@/lib';
+import { Creature, creaturePresets, createPane, disposePane, Pane } from '@/lib';
 import type { SketchMeta } from './types';
 
 const P5Wrapper = dynamic(() => import('@/components/P5Wrapper'), { ssr: false });
@@ -12,22 +12,20 @@ export const meta: SketchMeta = {
   chapter: 0,
   type: 'exercise',
   number: 11,
-  title: 'Ecosystem: Pond Skimmer',
-  description: 'A creature expressing personality through motion. Combines Perlin noise, random bursts, and center attraction.',
+  title: 'Ecosystem: Pond Life',
+  description: 'Multiple creatures with distinct personalities interacting in a pond. Each type has unique movement and behavior.',
 };
 
 const params = {
-  creatureCount: 3,
-  calmness: 0.7,
-  speed: 2,
-  burstChance: 0.02,
-  centerAttraction: 0.3,
-  size: 20,
+  skimmers: 2,
+  flies: 3,
+  leaves: 2,
+  fish: 2,
   showTrail: true,
-  trailOpacity: 15,
+  trailOpacity: 20,
 };
 
-export default function EcosystemPondSkimmer() {
+export default function EcosystemPond() {
   const paneRef = useRef<Pane | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const creaturesRef = useRef<Creature[]>([]);
@@ -42,71 +40,37 @@ export default function EcosystemPondSkimmer() {
       params,
       (pane) => {
         const populationFolder = pane.addFolder({ title: 'Population' });
-        populationFolder.addBinding(params, 'creatureCount', {
-          min: 1,
-          max: 10,
+
+        populationFolder.addBinding(params, 'skimmers', {
+          min: 0,
+          max: 5,
           step: 1,
-          label: 'Creatures',
+          label: 'Skimmers',
         });
 
-        const behaviorFolder = pane.addFolder({ title: 'Behavior' });
-        behaviorFolder
-          .addBinding(params, 'calmness', {
-            min: 0,
-            max: 1,
-            step: 0.05,
-            label: 'Calmness',
-          })
-          .on('change', (ev) => {
-            creaturesRef.current.forEach((c) => c.setCalmness(ev.value));
-          });
+        populationFolder.addBinding(params, 'flies', {
+          min: 0,
+          max: 8,
+          step: 1,
+          label: 'Flies',
+        });
 
-        behaviorFolder
-          .addBinding(params, 'speed', {
-            min: 0.5,
-            max: 5,
-            step: 0.5,
-            label: 'Speed',
-          })
-          .on('change', (ev) => {
-            creaturesRef.current.forEach((c) => c.setSpeed(ev.value));
-          });
+        populationFolder.addBinding(params, 'leaves', {
+          min: 0,
+          max: 5,
+          step: 1,
+          label: 'Leaves',
+        });
 
-        behaviorFolder
-          .addBinding(params, 'burstChance', {
-            min: 0,
-            max: 0.1,
-            step: 0.01,
-            label: 'Burst Chance',
-          })
-          .on('change', (ev) => {
-            creaturesRef.current.forEach((c) => c.setBurstChance(ev.value));
-          });
-
-        behaviorFolder
-          .addBinding(params, 'centerAttraction', {
-            min: 0,
-            max: 1,
-            step: 0.1,
-            label: 'Center Pull',
-          })
-          .on('change', (ev) => {
-            creaturesRef.current.forEach((c) => c.setCenterAttraction(ev.value));
-          });
+        populationFolder.addBinding(params, 'fish', {
+          min: 0,
+          max: 5,
+          step: 1,
+          label: 'Fish',
+        });
 
         const visualFolder = pane.addFolder({ title: 'Visual' });
-        visualFolder
-          .addBinding(params, 'size', {
-            min: 10,
-            max: 40,
-            step: 2,
-            label: 'Size',
-          })
-          .on('change', (ev) => {
-            creaturesRef.current.forEach((c) => c.setSize(ev.value));
-          });
-
-        visualFolder.addBinding(params, 'showTrail', { label: 'Show Trail' });
+        visualFolder.addBinding(params, 'showTrail', { label: 'Show Trails' });
         visualFolder.addBinding(params, 'trailOpacity', {
           min: 5,
           max: 50,
@@ -127,45 +91,77 @@ export default function EcosystemPondSkimmer() {
     };
   }, []);
 
-  // Helper to create creatures with slight variation
-  const createCreatures = (p: p5, count: number): Creature[] => {
+  const createAllCreatures = (p: p5): Creature[] => {
     const creatures: Creature[] = [];
-    const baseColors: [number, number, number][] = [
-      [80, 120, 200],   // blue
-      [100, 180, 120],  // green
-      [180, 100, 140],  // purple
-      [200, 160, 80],   // gold
-      [120, 200, 200],  // cyan
-    ];
 
-    for (let i = 0; i < count; i++) {
+    // Create skimmers with blue color variations
+    for (let i = 0; i < params.skimmers; i++) {
+      const hueShift = p.random(-20, 20);
       const creature = new Creature({
-        calmness: params.calmness + p.random(-0.1, 0.1),
-        speed: params.speed + p.random(-0.5, 0.5),
-        burstChance: params.burstChance,
-        centerAttraction: params.centerAttraction,
-        size: params.size + p.random(-4, 4),
-        color: baseColors[i % baseColors.length],
+        ...creaturePresets.skimmer,
+        color: [80 + hueShift, 120, 200 - hueShift],
+        size: 20 + p.random(-3, 3),
       });
       creature.init(p);
       creatures.push(creature);
     }
+
+    // Create flies
+    for (let i = 0; i < params.flies; i++) {
+      const creature = new Creature({
+        ...creaturePresets.fly,
+        color: [40 + p.random(40), 40 + p.random(40), 40 + p.random(40)],
+        size: 8 + p.random(-2, 2),
+      });
+      creature.init(p);
+      creatures.push(creature);
+    }
+
+    // Create leaves with green/brown variations
+    for (let i = 0; i < params.leaves; i++) {
+      const isAutumn = p.random() > 0.7;
+      const creature = new Creature({
+        ...creaturePresets.leaf,
+        color: isAutumn
+          ? [180 + p.random(40), 100 + p.random(40), 40]
+          : [80 + p.random(40), 140 + p.random(40), 50 + p.random(30)],
+        size: 22 + p.random(-5, 8),
+      });
+      creature.init(p);
+      creatures.push(creature);
+    }
+
+    // Create fish with orange/gold variations
+    for (let i = 0; i < params.fish; i++) {
+      const hueShift = p.random(-30, 30);
+      const creature = new Creature({
+        ...creaturePresets.fish,
+        color: [220 + hueShift, 140 - hueShift * 0.5, 60],
+        size: 18 + p.random(-3, 5),
+      });
+      creature.init(p);
+      creatures.push(creature);
+    }
+
     return creatures;
   };
+
+  const getTotalCreatures = () =>
+    params.skimmers + params.flies + params.leaves + params.fish;
 
   useEffect(() => {
     if (resetKey > 0 && p5Ref.current) {
       p5Ref.current.background(240, 248, 255);
-      creaturesRef.current = createCreatures(p5Ref.current, params.creatureCount);
+      creaturesRef.current = createAllCreatures(p5Ref.current);
     }
   }, [resetKey]);
 
   const sketch = (p: p5) => {
     p.setup = () => {
       p.createCanvas(640, 360);
-      p.background(240, 248, 255); // Light blue pond
+      p.background(240, 248, 255);
       p5Ref.current = p;
-      creaturesRef.current = createCreatures(p, params.creatureCount);
+      creaturesRef.current = createAllCreatures(p);
     };
 
     p.draw = () => {
@@ -184,16 +180,41 @@ export default function EcosystemPondSkimmer() {
       p.strokeWeight(3);
       p.ellipse(p.width / 2, p.height / 2, p.width - 20, p.height - 20);
 
-      // Adjust creature count if changed
-      if (creaturesRef.current.length !== params.creatureCount) {
-        creaturesRef.current = createCreatures(p, params.creatureCount);
+      // Draw some subtle water ripples
+      p.stroke(200, 220, 240, 50);
+      p.strokeWeight(1);
+      for (let i = 0; i < 3; i++) {
+        const rippleSize = 100 + i * 80 + Math.sin(p.frameCount * 0.02 + i) * 20;
+        p.ellipse(p.width / 2, p.height / 2, rippleSize, rippleSize * 0.6);
       }
 
-      // Update and draw creatures
-      for (const creature of creaturesRef.current) {
-        creature.update();
+      // Rebuild creatures if count changed
+      if (creaturesRef.current.length !== getTotalCreatures()) {
+        creaturesRef.current = createAllCreatures(p);
+      }
+
+      // Update and draw creatures (pass all creatures for social behavior)
+      const allCreatures = creaturesRef.current;
+      for (const creature of allCreatures) {
+        creature.update(allCreatures);
+      }
+
+      // Draw in order: leaves (bottom), fish, skimmers, flies (top)
+      const leaves = allCreatures.filter((c) => c.traits.type === 'leaf');
+      const fish = allCreatures.filter((c) => c.traits.type === 'fish');
+      const skimmers = allCreatures.filter((c) => c.traits.type === 'skimmer');
+      const flies = allCreatures.filter((c) => c.traits.type === 'fly');
+
+      for (const creature of [...leaves, ...fish, ...skimmers, ...flies]) {
         creature.display(p);
       }
+
+      // Draw creature count
+      p.fill(100);
+      p.noStroke();
+      p.textSize(10);
+      p.textAlign(p.LEFT, p.TOP);
+      p.text(`Creatures: ${allCreatures.length}`, 10, 10);
     };
   };
 
